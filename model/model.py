@@ -60,4 +60,4 @@ model.fit_generator(
     epochs=4
 )
 
-model.save('./bbq_model.tf', overwrite=True)
+model.save('./bbq_model.h5', overwrite=True)
