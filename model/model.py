@@ -11,7 +11,7 @@ bbq_output = GlobalAveragePooling2D()(bbq_output)
 bbq_output = Dense(1024, activation='relu')(bbq_output)
 bbq_output = Dense(1024, activation='relu')(bbq_output)
 bbq_output = Dense(512, activation='relu')(bbq_output)
-bbq_output = Dense(120, activation='softmax')(bbq_output)
+bbq_output = Dense(3, activation='softmax')(bbq_output)
 
 model = Model(inputs=base_model.input, outputs=bbq_output)
 
@@ -23,7 +23,7 @@ train_data_generator = ImageDataGenerator(
 )
 
 train_generator = train_data_generator.flow_from_directory(
-    './images',
+    './images/train',
     target_size=(224, 224),
     color_mode='rgb',
     batch_size=32,
