@@ -22,8 +22,21 @@ train_data_generator = ImageDataGenerator(
     preprocessing_function=preprocess_input
 )
 
+test_data_generator = ImageDataGenerator(
+    preprocessing_function=preprocess_input
+)
+
 train_generator = train_data_generator.flow_from_directory(
     './images/train',
+    target_size=(224, 224),
+    color_mode='rgb',
+    batch_size=32,
+    class_mode='categorical',
+    shuffle=True
+)
+
+test_generator = test_data_generator.flow_from_directory(
+    './images/test',
     target_size=(224, 224),
     color_mode='rgb',
     batch_size=32,
@@ -41,5 +54,10 @@ step_size_train = train_generator.n//train_generator.batch_size
 
 model.fit_generator(
     generator=train_generator,
-    steps_per_epoch=step_size_train, epochs=10
+    steps_per_epoch=step_size_train,
+    validation_data=test_generator,
+    validation_steps=10,
+    epochs=10
 )
+
+model.save('./bbq_model.tf', overwrite=True)
