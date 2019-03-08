@@ -11,7 +11,7 @@ bbq_output = GlobalAveragePooling2D()(bbq_output)
 bbq_output = Dense(1024, activation='relu')(bbq_output)
 bbq_output = Dense(1024, activation='relu')(bbq_output)
 bbq_output = Dense(512, activation='relu')(bbq_output)
-bbq_output = Dense(3, activation='softmax')(bbq_output)
+bbq_output = Dense(5, activation='softmax')(bbq_output)
 
 model = Model(inputs=base_model.input, outputs=bbq_output)
 
@@ -35,14 +35,14 @@ train_generator = train_data_generator.flow_from_directory(
     shuffle=True
 )
 
-test_generator = test_data_generator.flow_from_directory(
-    './images/test',
-    target_size=(224, 224),
-    color_mode='rgb',
-    batch_size=32,
-    class_mode='categorical',
-    shuffle=True
-)
+# test_generator = test_data_generator.flow_from_directory(
+#     './images/test',
+#     target_size=(224, 224),
+#     color_mode='rgb',
+#     batch_size=32,
+#     class_mode='categorical',
+#     shuffle=True
+# )
 
 model.compile(
     optimizer='Adam',
@@ -55,8 +55,8 @@ step_size_train = train_generator.n//train_generator.batch_size
 model.fit_generator(
     generator=train_generator,
     steps_per_epoch=step_size_train,
-    validation_data=test_generator,
-    validation_steps=10,
+    # validation_data=test_generator,
+    # validation_steps=10,
     epochs=10
 )
 
