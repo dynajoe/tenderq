@@ -8,14 +8,13 @@ base_model = MobileNet(weights='imagenet', include_top=False)
 
 bbq_output = base_model.output
 bbq_output = GlobalAveragePooling2D()(bbq_output)
-bbq_output = Dense(512, activation='relu')(bbq_output)
-bbq_output = Dense(512, activation='relu')(bbq_output)
-bbq_output = Dropout(0.3)(bbq_output)
+bbq_output = Dense(1024, activation='relu')(bbq_output)
+bbq_output = Dense(1024, activation='relu')(bbq_output)
 bbq_output = Dense(5, activation='softmax')(bbq_output)
 
 model = Model(inputs=base_model.input, outputs=bbq_output)
 
-for layer in model.layers[0:20]:
+for layer in model.layers[0:21]:
     layer.trainable = False
 
 train_data_generator = ImageDataGenerator(
