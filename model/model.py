@@ -14,14 +14,17 @@ bbq_output = Dense(5, activation='softmax')(bbq_output)
 
 model = Model(inputs=base_model.input, outputs=bbq_output)
 
-for layer in model.layers[0:21]:
+for layer in model.layers[:87]:
     layer.trainable = False
+
+for i, layer in enumerate(model.layers):
+    print(i, layer.name, layer.trainable)
 
 train_data_generator = ImageDataGenerator(
     preprocessing_function=preprocess_input
 )
 
-test_data_generator = ImageDataGenerator(
+validation_data_generator = ImageDataGenerator(
     preprocessing_function=preprocess_input
 )
 
@@ -29,16 +32,16 @@ train_generator = train_data_generator.flow_from_directory(
     './images/train',
     target_size=(224, 224),
     color_mode='rgb',
-    batch_size=16,
+    batch_size=64,
     class_mode='categorical',
     shuffle=True
 )
 
-test_generator = test_data_generator.flow_from_directory(
-    './images/test',
+validation_generator = validation_data_generator.flow_from_directory(
+    './images/validate',
     target_size=(224, 224),
     color_mode='rgb',
-    batch_size=16,
+    batch_size=10,
     class_mode='categorical',
     shuffle=True
 )
@@ -54,9 +57,9 @@ step_size_train = train_generator.n//train_generator.batch_size
 model.fit_generator(
     generator=train_generator,
     steps_per_epoch=step_size_train,
-    validation_data=test_generator,
-    validation_steps=3,
-    epochs=4
+    validation_data=validation_generator,
+    validation_steps=4,
+    epochs=5
 )
 
 model.save('./bbq_model.h5', overwrite=True)
