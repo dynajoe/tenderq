@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  video(id="v", width="300", height="300")
+  input(id="b", type="button", disabled="true", value="Take Picture")
+  canvas(id="c", style="display:none;", width="300", height="300")
+  script(src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js")
+  script(src="/js/app.js")
