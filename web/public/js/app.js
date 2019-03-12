@@ -3,7 +3,7 @@ async function app() {
 
    navigator.getUserMedia(
       { video: true },
-      function(stream) {
+      stream => {
          var video = document.getElementById('v')
          var canvas = document.getElementById('c')
          var button = document.getElementById('b')
@@ -11,14 +11,16 @@ async function app() {
          video.src = stream
          video.srcObject = stream
          video.play()
+
          button.disabled = false
-         button.onclick = function() {
+
+         button.onclick = () => {
             canvas.getContext('2d').drawImage(video, 0, 0, 300, 300, 0, 0, 300, 300)
             var img = canvas.toDataURL('image/png')
             console.log(img)
          }
       },
-      function(err) {
+      err => {
          alert('there was an error ' + err)
       }
    )
