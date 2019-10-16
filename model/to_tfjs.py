@@ -1,5 +1,5 @@
 import tensorflowjs as tfjs
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 
 tfjs_target_dir = './tfjs_out'
 
