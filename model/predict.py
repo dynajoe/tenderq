@@ -1,8 +1,8 @@
-from keras.models import load_model
-from keras.applications.mobilenet import preprocess_input
-from keras.preprocessing.image import img_to_array, load_img
-from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.models import load_model
+from tensorflow.keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.preprocessing.image import img_to_array, load_img
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications.mobilenet import preprocess_input
 import numpy as np
 
 model = load_model('./bbq_model.h5')
@@ -27,4 +27,3 @@ for i in range(len(test_generator)):
     label = labels[category.argmax(axis=-1)[0]]
     prediction = labels[probabilities.argmax(axis=-1)[0]]
     print(("FAIL", "OK")[label == prediction], ' label:', label, 'prediction: ', prediction)
-    

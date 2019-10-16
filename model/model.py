@@ -1,8 +1,8 @@
-from keras.applications import MobileNet
-from keras.layers import Dense, GlobalAveragePooling2D, Dropout
-from keras.models import Model
-from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.applications import MobileNet
+from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
+from tensorflow.keras.models import Model
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications.mobilenet import preprocess_input
 
 base_model = MobileNet(weights='imagenet', include_top=False)
 
